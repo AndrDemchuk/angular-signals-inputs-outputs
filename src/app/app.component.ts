@@ -1,15 +1,17 @@
 import {
   Component,
-  ElementRef,
   signal,
+  AfterViewInit,
   viewChild,
   viewChildren,
   ViewContainerRef,
+  OnInit,
+  effect
 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RATES } from './components/currency-converter/rates';
-import { CurrencyConverterComponent } from './components/currency-converter/currency-converter.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { CurrencyConverterComponent } from './components/currency-converter/currency-converter.component';
+import { RATES } from './components/currency-converter/rates';
 import { OptionSelectorComponent } from './components/option-selector/option-selector.component';
 import { OptionDirective } from './components/option-selector/option.directive';
 import { RgbDirective } from './directives/rgb.directive';
@@ -29,7 +31,7 @@ import { RgbDirective } from './directives/rgb.directive';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit, OnInit {
   currencyConverter = viewChild.required(CurrencyConverterComponent);
   currentConverters = viewChildren(CurrencyConverterComponent);
   myRefDiv = viewChild.required('myRef', { read: ViewContainerRef });
@@ -39,6 +41,21 @@ export class AppComponent {
     for (const converter of this.currentConverters()) {
       converter.stopRefresh();
     }
+  }
+
+  constructor() {
+    effect(() => {
+      console.log('effect', this.currencyConverter());
+    });
+  }
+
+  ngOnInit(): void {
+    console.log('On Init');
+  }
+
+
+  ngAfterViewInit(): void {
+    console.log('constructor, view child required signal value is', this.currencyConverter());
   }
 
   readonly currencies = Object.keys(RATES);
