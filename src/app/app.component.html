@@ -8,5 +8,8 @@
 </app-option-selector>
 
 <app-currency-converter [amount]="amount.value!" [currency]="currency()" (refreshRequired)="refreshData()" />
+<app-currency-converter [amount]="amount.value!" [currency]="currency()" (refreshRequired)="refreshData()" />
 
-<!-- <button (click)="stopRefresh()">Stop Refresh Events</button> -->
+<div #myRef></div>
+
+<button (click)="stopRefresh()">Stop Refresh Events</button>

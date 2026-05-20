@@ -1,7 +1,10 @@
 import {
   Component,
+  ElementRef,
   signal,
   viewChild,
+  viewChildren,
+  ViewContainerRef,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RATES } from './components/currency-converter/rates';
@@ -28,11 +31,16 @@ import { RgbDirective } from './directives/rgb.directive';
 })
 export class AppComponent {
   currencyConverter = viewChild.required(CurrencyConverterComponent);
+  currentConverters = viewChildren(CurrencyConverterComponent);
+  myRefDiv = viewChild.required('myRef', { read: ViewContainerRef });
 
-  /*   stopRefresh() {
-      this.currencyConverter().stopRefresh();
+  stopRefresh() {
+    this.currencyConverter().stopRefresh();
+    for (const converter of this.currentConverters()) {
+      converter.stopRefresh();
     }
-   */
+  }
+
   readonly currencies = Object.keys(RATES);
 
   readonly currency = signal('GBP');
