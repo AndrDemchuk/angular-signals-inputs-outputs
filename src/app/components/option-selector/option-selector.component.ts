@@ -12,12 +12,13 @@ import { OptionDirective } from './option.directive';
 export class OptionSelectorComponent {
   readonly options = input.required<string[]>();
 
+  readonly templateDirective = contentChild(OptionDirective);
+
   selected = model.required<string>();
 
   select(option: string) {
     this.selected.set(option);
   }
-  readonly templateDirective = contentChild(OptionDirective);
 
   /*     readonly selected = model.required(); */
 
