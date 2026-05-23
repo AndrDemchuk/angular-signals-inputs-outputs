@@ -1,25 +1,36 @@
 :host {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  button {
+    padding: 5px;
+  }
+
+  .currency-option {
     display: flex;
-    flex-direction: column;
     gap: 5px;
+    flex-direction: row;
+    align-items: center;
 
-    button {
-        padding: 5px;
-    }
+    font-family: Roboto;
+    font-size: 0.9em;
+  }
 
-    .currency-option {
-        display: flex;
-        gap: 5px;
-        flex-direction: row;
-        align-items: center;
-
-        font-family: Roboto;
-        font-size: 0.9em;
-    }
-
-    .currency-icon {
-        width: 20px;
-        height: 20px;
-    }
+  .currency-icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
+.option-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 2px;
+
+  .option-image {
+    width: 20px;
+    height: 20px;
+  }
+}

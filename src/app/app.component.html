@@ -5,6 +5,11 @@
 <label>Currency</label>
 
 <app-option-selector [options]="currencies" [(selected)]="currency">
+  <span class="option-container" *appOption="let currency">
+    <img class="option-image" [src]="'/icons/' + currency + '.svg'" alt="{{ currency }}" />
+    {{ currency }}
+  </span>
+
 </app-option-selector>
 
 <app-currency-converter [amount]="amount.value!" [currency]="currency()" (refreshRequired)="refreshData()" />

@@ -1,16 +1,21 @@
 import {
   computed,
   Directive,
+  effect,
+  HostBinding,
+  HostListener,
   input,
   signal,
 } from '@angular/core';
+import { interval } from 'rxjs';
 
 @Directive({
   selector: '[appRgb]',
   standalone: true,
   host: {
-    '[style.color]': 'color()', 
+    '[style.color]': 'color()',
     '(click)': 'invert()'
+
   }
 })
 export class RgbDirective {
@@ -20,6 +25,8 @@ export class RgbDirective {
 
   readonly inverted = signal(false);
 
+  /*   @HostBinding('style.color')
+    actualColor = ''; */
 
   readonly color = computed(() =>
     this.inverted()
@@ -27,8 +34,22 @@ export class RgbDirective {
       : `rgb(${this.red()}, ${this.green()}, ${this.blue()})`
   );
 
+  /*   @HostListener('click') */
   invert() {
     this.inverted.update((v) => !v);
+  }
+
+  constructor() {
+    /*     interval(1000).subscribe(() => {
+          this.invert();
+        }) */
+
+
+
+    /*     effect(() => {
+          this.actualColor = this.color();
+        })
+      } */
   }
 
 }
